@@ -1,0 +1,73 @@
+<%- include('../../partials/head.ejs') %> 
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %> 
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 my-5">
+                        <h5>My Recently Created Posts</h5>
+                        <div class="row">
+                            <% if (posts.length == 0) { %> 
+                                <p class="text-center text-muted">User has not created any post yet.</p>
+                            <% } else { %> 
+                                <% for (let post of posts) { %> 
+                                    <div class="card col-sm-3 m-2">
+                                        <% if(post.thumbnail) { %> 
+                                            <img src="<%= post.thumbnail %>" class="card-img-top mt-3" alt="<%= post.title %> ">
+                                        <% } %> 
+                                        <div class="card-body p-0 mt-2">
+                                            <a href="/explorers/<%= post._id %>" style="color: #222;">
+                                                <p><%= post.title %></p>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex">
+                                            <small mt-2>
+                                                <%= moment(post.createdAt) %>,   
+                                            </small>
+                                        </div>
+                                    </div>    
+                                <% } %> 
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2 my-5">
+                        <h5>Recently Bookmarked Posts</h5>
+                        <div class="row">
+                            <% if (bookmarks.length == 0) { %> 
+                                <p class="text-center text-muted">User has not created any post yet.</p>
+                            <% } else { %> 
+                                <% for (let post of bookmarks) { %> 
+                                    <div class="card col-sm-3 m-2">
+                                        <% if(post.thumbnail) { %> 
+                                            <img src="<%= post.thumbnail %>" class="card-img-top mt-3" alt="<%= post.title %> ">
+                                        <% } %> 
+                                        <div class="card-body p-0 mt-2">
+                                            <a href="/explorers/<%= post._id %>" style="color: #222;">
+                                                <p><%= post.title %></p>
+                                            </a>
+                                        </div>
+                                        <div class="d-flex">
+                                            <small mt-2>
+                                                <%= moment(post.createdAt) %>,   
+                                            </small>
+                                        </div>
+                                    </div>    
+                                <% } %> 
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include('../../partials/footer.ejs') %>
+
+</body>
+</html>

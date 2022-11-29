@@ -1,0 +1,30 @@
+window.onload = function() {
+    const bookmark = document.getElementById('bookmark');
+    bookmark.style.cursor = 'pointer'
+    bookmark.addEventListener('click', function(e) {
+        let target = e.target.parentElement
+
+        let headers = new Headers();
+        headers.append('Accept', 'Application/JSON')
+
+        let req = new Request(`/api/bookmarks/${target.dataset.post}`, {
+            method: 'GET',
+            headers,
+            mode: 'cors'
+        })
+
+        fetch(req)
+            .then(res => res.json())
+            .then(data => {
+                if (data.bookmarked) {
+                    target.innerHTML = `<i class="fas fa-bookmark"></i>`
+                } else {
+                    target.innerHTML = `<i class="far fa-bookmark"></i>`
+                }
+            })
+            .catch(e => {
+                console.log(e.message)
+                alert(e.message)
+            })
+    })
+}

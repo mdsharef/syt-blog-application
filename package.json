@@ -1,0 +1,32 @@
+{
+  "name": "blog-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Md Shareful Islam",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chalk": "^4.1.0",
+    "cheerio": "^1.0.0-rc.11",
+    "config": "^3.3.7",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.1",
+    "moment": "^2.29.3",
+    "mongoose": "^6.3.8",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.16",
+    "reading-time": "^1.5.0",
+    "validator": "^13.7.0"
+  }
+}

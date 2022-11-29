@@ -1,0 +1,74 @@
+<%- include('../../partials/head.ejs') %> 
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+
+                <h5 class="mb-5">Result For - <%= term %> </h5>
+
+                <% if (posts.length == 0) { %> 
+                    <p class="text-center text-muted">There is no result for this search term.</p>
+                <% } else { %> 
+                    <% for (let post of posts) { %> 
+                        <div class="card card-body mb-3">
+                            <% if(post.thumbnail) { %> 
+                                <img src="<%= post.thumbnail %>" class="img-fluid mb-2" alt="<%= post.title %> ">
+                            <% } %> 
+                            <a href="/explorers/<%= post._id %>" style="color: #222;">
+                                <h5><%= post.title %></h5>
+                                <p class="mb-4"><%= truncate(post.body) %></p>
+                            </a>
+                            <div class="d-flex">
+                                <small>
+                                    <%= moment(post.createdAt) %>,  
+                                    Posted By <a href="/author/<%= post.author._id %> "><%= post.author.profile.name %></a>, 
+                                    <%= post.readTime %> 
+                                </small>
+                                <% if(user) { %> 
+                                    <span class="ml-auto bookmark" data-post="<%= post._id %>">
+                                        <% if(bookmarks.includes(post._id)) { %> 
+                                            <i class="fas fa-bookmark"></i>
+                                        <% } else { %> 
+                                            <i class="far fa-bookmark"></i>
+                                        <% } %> 
+                                    </span>
+                                <% } %> 
+                            </div>
+                        </div>    
+                    <% } %> 
+                <% } %> 
+                
+                <% if(totalPage > 1) { %> 
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item <%= currentPage == 1 ? 'disabled' : '' %> ">
+                                <a href="<%=`/search?term=${term}&page=${currentPage - 1}` %> " class="page-link">
+                                    Previous
+                                </a>
+                            </li>
+
+                            <% for(let i = 1; i <= totalPage; i++) { %>
+                                <li class="page-item <%= currentPage == i ? 'active' : '' %> ">
+                                    <a href="<%=`/search?term=${term}&page=${i}` %> " class="page-link">
+                                        <%= i %> 
+                                    </a>
+                                </li>
+                            <% } %> 
+
+                            <li class="page-item <%= currentPage == totalPage ? 'disabled' : '' %> ">
+                                <a href="<%=`/search?term=${term}&page=${currentPage + 1}` %> " class="page-link">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                <% } %> 
+            </div>
+        </div>
+    </div>
+
+<%- include('../../partials/footer.ejs') %> 
+
+<script src="/scripts/bookmarks.js"></script>
+    
+</body>
+</html>

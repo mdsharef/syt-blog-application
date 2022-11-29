@@ -1,0 +1,80 @@
+<%- include('../../../partials/head.ejs') %> 
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../../partials/sidebar.ejs') %> 
+            </div>
+
+            <div class="col-md-10 my-5">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card card-body">
+                            <h5 class="my-3">Create A New Post</h5>
+                            <form action="/posts/create" method="POST" enctype="multipart/form-data">  
+                                <!-- enctype="multipart/form-data" dosen't work without multer. you must provide multer as middleware -->
+                                <div class="form-group mb-3">
+                                    <label for="title">Enter Your Post Title</label>
+                                    <input 
+                                        type="text" 
+                                        name="title" 
+                                        id="title" 
+                                        class="form-control <%= error.title ? 'is-invalid' : ''%> "
+                                        <% if (value.title) { %> 
+                                            value="<%= value.title %> "
+                                        <% } %> 
+                                        placeholder="Enter A Title"
+                                    >
+                                    <div class="invalid-feedback">
+                                        <%= error.title %> 
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="tiny-mce-post-body">Enter Your Post Body</label>
+                                    <textarea 
+                                        name="body"
+                                        id="tiny-mce-post-body" 
+                                        class="form-control <%= error.body ? 'is-invalid' : '' %> "
+                                        placeholder="Type Your Message"
+                                    ><% if (value.body) { %> 
+                                        <%= value.body %> 
+                                    <% } %></textarea>
+                                    <div class="invalid-feedback">
+                                        <%= error.body %> 
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="tags">Enter Some Tags (Max 10)</label>
+                                    <input 
+                                        type="text" 
+                                        name="tags" 
+                                        <% if (value.tags) { %> 
+                                            value="<%= value.tags %> "
+                                        <% } %> 
+                                        placeholder="tag1, tag2, tag3..." 
+                                        class="form-control  <%= error.tags ? 'is-invalid' : '' %> "
+                                    >
+                                    <div class="invalid-feedback">
+                                        <%= error.tags %> 
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3 mt-3">
+                                    <input type="file" name="post-thumbnail" class="form-control" id="inputGroupFile01">
+                                    <label class="input-group-text" for="inputGroupFile01">Upload</label>
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Create Post">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include('../../../partials/footer.ejs') %>
+<script src="https://cdn.tiny.cloud/1/0z083mq8nd627ti2bv52putxpj0bdz9n420zi9ll5tyvxs11/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script src="/scripts/tinymce.js"></script>
+
+</body>
+</html>

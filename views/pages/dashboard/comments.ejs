@@ -1,0 +1,51 @@
+<%- include('../../partials/head.ejs') %> 
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <%- include('../../partials/sidebar.ejs') %> 
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card card-body my-5">
+                            <h5>Recent Comments On My Post</h5>
+                            <div class="mt-5" id="comment-holder">
+                                <% if (comments.length === 0) { %> 
+                                    <p class="text-center text-muted">There is no Comment</p>
+                                <% } else { %>
+                                    <% for (let comment of comments.reverse()) { %>
+                                        <div class="media border">
+                                            <img src="<%= comment.user.profilePic %> " alt="User Profile Picture" class="rounded-cicle mx-3 my-3" style="width: 40px;">
+                                            <div class="media-body my-3">
+                                                <p class="text-muted">
+                                                    On Post <strong><%= comment.post.title %> </strong> By <a href="/author/<%= comment.user._id %> "><%= comment.user.username %> </a>,
+                                                    <%= moment(comment.createdAt) %> 
+                                                </p>
+                                                <p><%= comment.body %> </p>
+
+                                                 <!-- Some code may place here which I cut bcz it causes problem. If I can solve the problem, I will introduce them here. Their location is singlePageView.ejs (between comment section: under the div with class="replies") -->
+
+                                                <div class="my-3">
+                                                    <input type="text" class="form-control" placeholder="Press Enter To Reply" name="reply" data-comment="<%= comment._id %>">
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    <% } %> 
+                                <% } %> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+<%- include('../../partials/footer.ejs') %>
+
+<script src="/scripts/comment.js"></script>
+
+</body>
+</html>
